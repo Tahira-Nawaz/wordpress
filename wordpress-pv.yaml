@@ -12,7 +12,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   local:
-    path: /var/www/html
+    path: /var/www/wordpress
   nodeAffinity:
    required:
     nodeSelectorTerms:
@@ -20,4 +20,4 @@ spec:
       - key: kubernetes.io/hostname
         operator: In
         values:
-        - node01
+        - ip-172-31-21-150

@@ -17,10 +17,10 @@ kubectl apply -f mysql-service.yaml
 kubectl get svc
 
 
-kubectl exec -it <mysql-pod-name> -- bash
+kubectl exec -it wordpress-mysql-5f6c6fc4c7-kwfzc -- bash
 mysql -u root -p
 # Enter password: mysql1234
-CREATE DATABASE wordpress;
+CREATE DATABASE wordpress-mysql;
 SHOW DATABASES;
 EXIT;
 
@@ -36,5 +36,8 @@ kubectl apply -f wordpress-deployment.yaml
 kubectl get pods
 kubectl apply -f wordpress-service.yaml
 kubectl get svc
+
+kubectl patch svc wordpress-service -p '{"spec": {"type": "NodePort"}}'
+
 
 kubectl get secret --namespace default wp-db-secrets -o jsonpath="{.data.MYSQL_ROOT_PASSWORD}" | base64 --decode
